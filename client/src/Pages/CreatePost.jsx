@@ -25,7 +25,7 @@ if(form.prompt){
 
 setGeneratingImg(true)
 
-const res = await fetch('http://localhost:8080/api/v1/dalle',{
+const res = await fetch('http://35.89.21.236:8080/api/v1/dalle',{
   method: 'POST',
   headers:{
     'Content-Type': 'application/json'
