@@ -1,0 +1,111 @@
+{
+  "version": "1.0",
+  "description": "Skill activation triggers for Next.js + TypeScript + OpenSpec project",
+  "skills": {
+    "nextjs-api-guidelines": {
+      "type": "domain",
+      "enforcement": "suggest",
+      "priority": "high",
+      "description": "Next.js App Router API development patterns with TypeScript and TDD",
+      "promptTriggers": {
+        "keywords": [
+          "API route",
+          "api",
+          "endpoint",
+          "route handler",
+          "NextResponse",
+          "GET",
+          "POST",
+          "PUT",
+          "DELETE",
+          "PATCH",
+          "backend",
+          "server",
+          "middleware"
+        ],
+        "intentPatterns": [
+          "(create|add|implement|build).*?(route|endpoint|API|handler)",
+          "(fix|handle|debug).*?(API|route|endpoint)",
+          "(how to|best practice).*?(API|route|endpoint)"
+        ]
+      },
+      "fileTriggers": {
+        "pathPatterns": [
+          "app/api/**/*.ts",
+          "app/api/**/route.ts"
+        ],
+        "pathExclusions": [
+          "**/*.test.ts",
+          "**/*.spec.ts"
+        ],
+        "contentPatterns": [
+          "export.*GET",
+          "export.*POST",
+          "export.*PUT",
+          "export.*DELETE",
+          "NextResponse",
+          "NextRequest"
+        ]
+      }
+    },
+    "openspec-workflow": {
+      "type": "workflow",
+      "enforcement": "suggest",
+      "priority": "high",
+      "description": "OpenSpec specification-driven development workflow",
+      "promptTriggers": {
+        "keywords": [
+          "spec",
+          "specification",
+          "openspec",
+          "proposal",
+          "change proposal",
+          "new feature",
+          "implement feature"
+        ],
+        "intentPatterns": [
+          "(create|add|implement|build).*?(feature|functionality)",
+          "(write|create).*?(spec|specification|proposal)",
+          "openspec.*?(workflow|process)"
+        ]
+      },
+      "fileTriggers": {
+        "pathPatterns": [
+          "openspec/**/*.md",
+          "openspec/changes/**/*",
+          "openspec/specs/**/*"
+        ]
+      }
+    },
+    "tdd-workflow": {
+      "type": "workflow",
+      "enforcement": "suggest",
+      "priority": "high",
+      "description": "Test-Driven Development workflow for Next.js",
+      "promptTriggers": {
+        "keywords": [
+          "test",
+          "TDD",
+          "testing",
+          "jest",
+          "test-driven",
+          "write test",
+          "test first"
+        ],
+        "intentPatterns": [
+          "(write|create|add).*?test",
+          "test.*?(fail|pass|red|green)",
+          "(TDD|test.*?driven)"
+        ]
+      },
+      "fileTriggers": {
+        "pathPatterns": [
+          "__tests__/**/*.test.ts",
+          "__tests__/**/*.test.tsx",
+          "**/*.test.ts",
+          "**/*.test.tsx"
+        ]
+      }
+    }
+  }
+}

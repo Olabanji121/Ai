@@ -1,14 +1,15 @@
 # AI API Project
 
 ## Overview
-A Node.js API project developed using OpenSpec specification-driven development and Test-Driven Development (TDD).
+A full-stack Next.js application developed using OpenSpec specification-driven development and Test-Driven Development (TDD).
 
 ## Tech Stack
 - **Runtime**: Node.js v22.21.1
-- **Framework**: Express 5.1.0
-- **Testing**: Jest 30.2.0 with Supertest
+- **Framework**: Next.js 15.0.3 (App Router)
+- **Language**: TypeScript 5.x
+- **Testing**: Jest 30.2.0 with @testing-library/react
+- **Styling**: Tailwind CSS 3.4.1
 - **Specification**: OpenSpec for spec-driven development
-- **API Documentation**: Swagger UI
 
 ## Development Philosophy
 
@@ -28,39 +29,82 @@ Every feature must follow the TDD cycle:
 
 ## Project Conventions
 
-### Code Structure
+### Code Structure (Next.js App Router)
 ```
-src/
-  ├── index.js         # Main server entry point
-  ├── routes/          # Route handlers
-  ├── controllers/     # Business logic
-  ├── models/          # Data models
-  └── middleware/      # Express middleware
+app/
+  ├── layout.tsx           # Root layout
+  ├── page.tsx             # Home page
+  ├── globals.css          # Global styles
+  ├── api/                 # API routes
+  │   └── [endpoint]/
+  │       └── route.ts     # API handlers (GET, POST, etc.)
+  ├── [feature]/           # Feature pages
+  │   ├── page.tsx         # Feature page
+  │   └── components/      # Feature-specific components
+  └── components/          # Shared components
 
-tests/
-  └── [feature].test.js  # Test files mirroring src structure
+__tests__/
+  ├── api/                 # API route tests
+  │   └── [endpoint].test.ts
+  └── components/          # Component tests
+      └── [Component].test.tsx
 ```
+
+### TypeScript Standards
+- Use strict mode
+- Define proper types/interfaces
+- Avoid `any` unless absolutely necessary
+- Use type inference where appropriate
+- Export types from components and utilities
 
 ### Testing Standards
-- All endpoints must have test coverage
-- Tests must be in `tests/` directory
-- Use Jest for unit tests
-- Use Supertest for integration/API tests
+- All API routes must have test coverage
+- All components should have tests
+- Tests must be in `__tests__/` directory
+- Use Jest for unit/integration tests
+- Use @testing-library/react for component tests
 - Minimum coverage: 80%
 
-### API Standards
-- RESTful design principles
-- JSON request/response format
+### API Route Standards (Next.js App Router)
+- Use route handlers (route.ts files)
+- Export named functions: GET, POST, PUT, DELETE, PATCH
+- Return NextResponse.json() for JSON responses
 - Proper HTTP status codes
-- Error handling middleware
-- Input validation
+- Type request/response payloads
+- Input validation with TypeScript
+- Error handling with try/catch
+
+### Component Standards
+- Use TypeScript for all components
+- Define prop interfaces
+- Use 'use client' directive for client components
+- Server components by default
+- Proper SEO with metadata
+
+### Styling Standards
+- Tailwind CSS utility classes
+- Avoid inline styles
+- Use Tailwind config for custom themes
+- Mobile-first responsive design
 
 ### Commit Standards
 - Write clear, descriptive commit messages
 - Reference OpenSpec change proposals in commits
 - Ensure all tests pass before committing
+- Run `npm run lint` before committing
 
 ## Quality Gates
 - All tests must pass (`npm test`)
+- TypeScript must compile without errors (`npm run build`)
+- Linting must pass (`npm run lint`)
 - Code follows project conventions
 - OpenSpec specifications are up to date
+
+## Development Commands
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm start` - Start production server
+- `npm test` - Run all tests
+- `npm run test:watch` - Run tests in watch mode
+- `npm run test:coverage` - Generate coverage report
+- `npm run lint` - Run ESLint
