@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { executeWithTracking } from '@/lib/mastra/utils';
 import { trendDiscoveryAgent } from '@/lib/mastra/agents';
-import { trendRepository } from '@/lib/db/repositories';
+// trendRepository will be used for actual trend discovery
 
 /**
  * POST /api/workflows/trend-discovery
@@ -37,7 +37,7 @@ Focus on:
 
 Identify the top ${input.maxTrends} trends and provide analysis.`;
 
-        const response = await trendDiscoveryAgent.generate(prompt);
+        await trendDiscoveryAgent.generate(prompt);
 
         // For now, return simulated results
         // In production, this would process the agent's response

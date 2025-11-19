@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { executeWithTracking } from '@/lib/mastra/utils';
-import { postRepository, userSettingsRepository } from '@/lib/db/repositories';
+import { userSettingsRepository } from '@/lib/db/repositories';
 
 /**
  * POST /api/workflows/publish

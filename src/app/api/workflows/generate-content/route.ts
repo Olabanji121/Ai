@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { executeWithTracking } from '@/lib/mastra/utils';
 import { contentGenerationAgent } from '@/lib/mastra/agents';
-import { trendRepository, postRepository, userSettingsRepository } from '@/lib/db/repositories';
+import { trendRepository, userSettingsRepository } from '@/lib/db/repositories';
 
 /**
  * POST /api/workflows/generate-content

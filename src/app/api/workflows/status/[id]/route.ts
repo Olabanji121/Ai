@@ -8,7 +8,7 @@ import { getWorkflowRun } from '@/lib/mastra/utils';
  */
 
 export async function GET(
-  request: NextRequest,
+  _request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
