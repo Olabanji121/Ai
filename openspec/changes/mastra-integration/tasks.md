@@ -3,105 +3,105 @@
 ## Task 1: Project Setup & Dependencies
 
 ### 1.1 Install Mastra Framework
-- [ ] Install `@mastra/core` package
-- [ ] Install `@mastra/llm-openai` package
-- [ ] Install `@mastra/llm-anthropic` package
-- [ ] Install `zod` for schema validation
-- [ ] Update `package.json` with correct versions
-- [ ] Run `pnpm install` and verify no conflicts
+- [x] Install `@mastra/core` package
+- [x] Install `@mastra/llm-openai` package
+- [x] Install `@mastra/llm-anthropic` package
+- [x] Install `zod` for schema validation
+- [x] Update `package.json` with correct versions
+- [x] Run `pnpm install` and verify no conflicts
 
 ### 1.2 Environment Configuration
-- [ ] Add `OPENAI_API_KEY` to `.env.local.example`
-- [ ] Add `ANTHROPIC_API_KEY` to `.env.local.example`
+- [x] Add `OPENAI_API_KEY` to `.env.local.example`
+- [x] Add `ANTHROPIC_API_KEY` to `.env.local.example`
 - [ ] Update `.gitignore` to exclude `.env.local`
 - [ ] Document API key setup in README
-- [ ] Create `.env.test` with test API keys or mocks
+- [x] Create `.env.test` with test API keys or mocks
 
 ### 1.3 Create Directory Structure
-- [ ] Create `src/lib/mastra/` directory
-- [ ] Create `src/lib/mastra/agents/` directory
-- [ ] Create `src/lib/mastra/workflows/` directory
-- [ ] Create `src/lib/mastra/tools/` directory
-- [ ] Create `src/lib/mastra/__tests__/` directory
-- [ ] Create index files for each subdirectory
+- [x] Create `src/lib/mastra/` directory
+- [x] Create `src/lib/mastra/agents/` directory
+- [x] Create `src/lib/mastra/workflows/` directory
+- [x] Create `src/lib/mastra/tools/` directory
+- [x] Create `src/lib/mastra/__tests__/` directory
+- [x] Create index files for each subdirectory
 
 ---
 
 ## Task 2: Mastra Configuration
 
 ### 2.1 Create Configuration File
-- [ ] Create `src/lib/mastra/config.ts`
-- [ ] Define `MastraConfig` TypeScript interface
-- [ ] Add OpenAI configuration with model selection
-- [ ] Add Anthropic configuration with model selection
-- [ ] Add workflow scheduling configuration
-- [ ] Add logging configuration
-- [ ] Add environment variable validation with Zod
+- [x] Create `src/lib/mastra/config.ts`
+- [x] Define `MastraConfig` TypeScript interface
+- [x] Add OpenAI configuration with model selection
+- [x] Add Anthropic configuration with model selection
+- [x] Add workflow scheduling configuration
+- [x] Add logging configuration
+- [x] Add environment variable validation with Zod
 
 ### 2.2 Initialize Mastra Client
-- [ ] Create `src/lib/mastra/client.ts`
-- [ ] Initialize Mastra instance with config
+- [x] Create `src/lib/mastra/client.ts`
+- [x] Initialize Mastra instance with config
 - [ ] Configure OpenAI LLM provider
 - [ ] Configure Anthropic LLM provider
 - [ ] Add connection health checks
-- [ ] Export singleton Mastra client
-- [ ] Add error handling for initialization failures
+- [x] Export singleton Mastra client
+- [x] Add error handling for initialization failures
 
 ### 2.3 Create Main Export File
-- [ ] Create `src/lib/mastra/index.ts`
-- [ ] Export Mastra client
-- [ ] Export configuration
-- [ ] Export all agents (will add later)
-- [ ] Export all workflows (will add later)
-- [ ] Export all tools (will add later)
+- [x] Create `src/lib/mastra/index.ts`
+- [x] Export Mastra client
+- [x] Export configuration
+- [x] Export all agents (will add later)
+- [x] Export all workflows (will add later)
+- [x] Export all tools (will add later)
 
 ---
 
 ## Task 3: Tool Implementation
 
 ### 3.1 Create Trend Tools
-- [ ] Create `src/lib/mastra/tools/trend.tools.ts`
-- [ ] Implement `getTrends` tool (wraps `trendRepository.findAll`)
-- [ ] Implement `getTopTrends` tool (wraps `trendRepository.findTopTrends`)
-- [ ] Implement `createTrend` tool (wraps `trendRepository.create`)
+- [x] Create `src/lib/mastra/tools/trend.tools.ts`
+- [x] Implement `getTrends` tool (wraps `trendRepository.findAll`)
+- [x] Implement `getTopTrends` tool (wraps `trendRepository.findTopTrends`)
+- [x] Implement `createTrend` tool (wraps `trendRepository.create`)
 - [ ] Implement `updateTrend` tool (wraps `trendRepository.update`)
-- [ ] Implement `markTrendUsed` tool (wraps `trendRepository.markAsUsed`)
-- [ ] Add Zod schemas for input validation
+- [x] Implement `markTrendUsed` tool (wraps `trendRepository.markAsUsed`)
+- [x] Add Zod schemas for input validation
 - [ ] Add error handling and logging
-- [ ] Export `trendTools` object
+- [x] Export `trendTools` object
 
 ### 3.2 Create Post Tools
-- [ ] Create `src/lib/mastra/tools/post.tools.ts`
-- [ ] Implement `createPost` tool (wraps `postRepository.create`)
-- [ ] Implement `getPost` tool (wraps `postRepository.findById`)
-- [ ] Implement `getPostWithTrend` tool (wraps `postRepository.findByIdWithTrend`)
-- [ ] Implement `approvePost` tool (wraps `postRepository.approve`)
-- [ ] Implement `publishPost` tool (wraps `postRepository.markPublished`)
-- [ ] Implement `getPostsByPlatform` tool
-- [ ] Add Zod schemas for input validation
-- [ ] Export `postTools` object
+- [x] Create `src/lib/mastra/tools/post.tools.ts`
+- [x] Implement `createPost` tool (wraps `postRepository.create`)
+- [x] Implement `getPost` tool (wraps `postRepository.findById`)
+- [x] Implement `getPostWithTrend` tool (wraps `postRepository.findByIdWithTrend`)
+- [x] Implement `approvePost` tool (wraps `postRepository.approve`)
+- [x] Implement `publishPost` tool (wraps `postRepository.markPublished`)
+- [x] Implement `getPostsByPlatform` tool
+- [x] Add Zod schemas for input validation
+- [x] Export `postTools` object
 
 ### 3.3 Create Analytics Tools
-- [ ] Create `src/lib/mastra/tools/analytics.tools.ts`
-- [ ] Implement `getPostAnalytics` tool (wraps `analyticsRepository.findByPostId`)
-- [ ] Implement `getLatestAnalytics` tool
-- [ ] Implement `getPlatformStats` tool (wraps `getAggregateByPlatform`)
-- [ ] Implement `calculatePerformanceScore` tool
-- [ ] Add Zod schemas for input validation
-- [ ] Export `analyticsTools` object
+- [x] Create `src/lib/mastra/tools/analytics.tools.ts`
+- [x] Implement `getPostAnalytics` tool (wraps `analyticsRepository.findByPostId`)
+- [x] Implement `getLatestAnalytics` tool
+- [x] Implement `getPlatformStats` tool (wraps `getAggregateByPlatform`)
+- [x] Implement `calculatePerformanceScore` tool
+- [x] Add Zod schemas for input validation
+- [x] Export `analyticsTools` object
 
 ### 3.4 Create User Settings Tools
-- [ ] Create `src/lib/mastra/tools/user-settings.tools.ts`
-- [ ] Implement `getUserSettings` tool (wraps `userSettingsRepository.findByUserId`)
-- [ ] Implement `updateBrandVoice` tool
-- [ ] Implement `getPlatforms` tool
-- [ ] Add Zod schemas for input validation
-- [ ] Export `userSettingsTools` object
+- [x] Create `src/lib/mastra/tools/user-settings.tools.ts`
+- [x] Implement `getUserSettings` tool (wraps `userSettingsRepository.findByUserId`)
+- [x] Implement `updateBrandVoice` tool
+- [x] Implement `getPlatforms` tool
+- [x] Add Zod schemas for input validation
+- [x] Export `userSettingsTools` object
 
 ### 3.5 Create Tool Index
-- [ ] Create `src/lib/mastra/tools/index.ts`
-- [ ] Export all tool objects
-- [ ] Create `allTools` array combining all tools
+- [x] Create `src/lib/mastra/tools/index.ts`
+- [x] Export all tool objects
+- [x] Create `allTools` array combining all tools
 - [ ] Add TypeScript types for tool parameters and returns
 
 ---
@@ -109,43 +109,43 @@
 ## Task 4: Agent Implementation
 
 ### 4.1 Create Trend Discovery Agent
-- [ ] Create `src/lib/mastra/agents/trend-discovery.agent.ts`
-- [ ] Define agent configuration with OpenAI GPT-4
-- [ ] Write comprehensive system prompt for trend scoring
+- [x] Create `src/lib/mastra/agents/trend-discovery.agent.ts`
+- [x] Define agent configuration with OpenAI GPT-4
+- [x] Write comprehensive system prompt for trend scoring
 - [ ] Add trend analysis instructions (virality, relevance, content potential)
 - [ ] Provide examples of good vs bad trends
-- [ ] Assign `trendTools` to agent
+- [x] Assign `trendTools` to agent
 - [ ] Add structured output schema (score, category, sentiment)
 - [ ] Test agent with sample trends
-- [ ] Export `trendDiscoveryAgent`
+- [x] Export `trendDiscoveryAgent`
 
 ### 4.2 Create Content Generation Agent
-- [ ] Create `src/lib/mastra/agents/content-generation.agent.ts`
-- [ ] Define agent configuration with Anthropic Claude 3.5 Sonnet
-- [ ] Write comprehensive system prompt for content creation
-- [ ] Add platform-specific guidelines (Twitter 280 chars, LinkedIn tone, etc.)
-- [ ] Add brand voice adaptation instructions
+- [x] Create `src/lib/mastra/agents/content-generation.agent.ts`
+- [x] Define agent configuration with Anthropic Claude 3.5 Sonnet
+- [x] Write comprehensive system prompt for content creation
+- [x] Add platform-specific guidelines (Twitter 280 chars, LinkedIn tone, etc.)
+- [x] Add brand voice adaptation instructions
 - [ ] Provide content examples for each platform
-- [ ] Assign `trendTools`, `postTools`, `userSettingsTools` to agent
+- [x] Assign `trendTools`, `postTools`, `userSettingsTools` to agent
 - [ ] Add structured output schema (content, hashtags, tone)
 - [ ] Test agent with sample trends and user settings
-- [ ] Export `contentGenerationAgent`
+- [x] Export `contentGenerationAgent`
 
 ### 4.3 Create Content Optimizer Agent
-- [ ] Create `src/lib/mastra/agents/content-optimizer.agent.ts`
-- [ ] Define agent configuration with OpenAI GPT-4
-- [ ] Write comprehensive system prompt for performance analysis
+- [x] Create `src/lib/mastra/agents/content-optimizer.agent.ts`
+- [x] Define agent configuration with OpenAI GPT-4
+- [x] Write comprehensive system prompt for performance analysis
 - [ ] Add analytics interpretation instructions
 - [ ] Add optimization recommendation guidelines
 - [ ] Provide examples of good insights
-- [ ] Assign `analyticsTools`, `postTools` to agent
+- [x] Assign `analyticsTools`, `postTools` to agent
 - [ ] Add structured output schema (insights, recommendations, score)
 - [ ] Test agent with sample analytics data
-- [ ] Export `contentOptimizerAgent`
+- [x] Export `contentOptimizerAgent`
 
 ### 4.4 Create Agent Index
-- [ ] Create `src/lib/mastra/agents/index.ts`
-- [ ] Export all agents
+- [x] Create `src/lib/mastra/agents/index.ts`
+- [x] Export all agents
 - [ ] Add TypeScript types for agent inputs and outputs
 - [ ] Add helper functions for agent invocation
 
@@ -154,8 +154,8 @@
 ## Task 5: Workflow Implementation
 
 ### 5.1 Create Trend Discovery Workflow
-- [ ] Create `src/lib/mastra/workflows/trend-discovery.workflow.ts`
-- [ ] Define workflow input schema (sources, filters)
+- [x] Create `src/lib/mastra/workflows/trend-discovery.workflow.ts`
+- [x] Define workflow input schema (sources, filters)
 - [ ] Implement step 1: Fetch trends from sources (placeholder for now)
 - [ ] Implement step 2: Score trends using `trendDiscoveryAgent`
 - [ ] Implement step 3: Filter by score threshold
@@ -166,8 +166,8 @@
 - [ ] Export workflow function
 
 ### 5.2 Create Content Generation Workflow
-- [ ] Create `src/lib/mastra/workflows/content-generation.workflow.ts`
-- [ ] Define workflow input schema (userId, platforms, count)
+- [x] Create `src/lib/mastra/workflows/content-generation.workflow.ts`
+- [x] Define workflow input schema (userId, platforms, count)
 - [ ] Implement step 1: Get top trends using `trendTools.getTopTrends`
 - [ ] Implement step 2: Get user settings using `userSettingsTools`
 - [ ] Implement step 3: Generate posts using `contentGenerationAgent`
@@ -179,8 +179,8 @@
 - [ ] Export workflow function
 
 ### 5.3 Create Publishing Workflow
-- [ ] Create `src/lib/mastra/workflows/publishing.workflow.ts`
-- [ ] Define workflow input schema (postIds)
+- [x] Create `src/lib/mastra/workflows/publishing.workflow.ts`
+- [x] Define workflow input schema (postIds)
 - [ ] Implement step 1: Get approved posts
 - [ ] Implement step 2: Validate posts ready for publishing
 - [ ] Implement step 3: Publish to platforms (placeholder for now)
@@ -191,8 +191,8 @@
 - [ ] Export workflow function
 
 ### 5.4 Create Optimization Workflow
-- [ ] Create `src/lib/mastra/workflows/optimization.workflow.ts`
-- [ ] Define workflow input schema (date range, platforms)
+- [x] Create `src/lib/mastra/workflows/optimization.workflow.ts`
+- [x] Define workflow input schema (date range, platforms)
 - [ ] Implement step 1: Get recent posts with analytics
 - [ ] Implement step 2: Analyze performance using `contentOptimizerAgent`
 - [ ] Implement step 3: Generate optimization insights
@@ -203,8 +203,8 @@
 - [ ] Export workflow function
 
 ### 5.5 Create Workflow Index
-- [ ] Create `src/lib/mastra/workflows/index.ts`
-- [ ] Export all workflows
+- [x] Create `src/lib/mastra/workflows/index.ts`
+- [x] Export all workflows
 - [ ] Add TypeScript types for workflow inputs and outputs
 - [ ] Add helper functions for workflow execution
 
@@ -213,14 +213,14 @@
 ## Task 6: Workflow State Tracking
 
 ### 6.1 Create Workflow Run Utilities
-- [ ] Create `src/lib/mastra/utils/workflow-tracking.ts`
-- [ ] Implement `startWorkflowRun(name, input)` function
-- [ ] Implement `completeWorkflowRun(id, output)` function
-- [ ] Implement `failWorkflowRun(id, error)` function
-- [ ] Implement `getWorkflowRun(id)` function
-- [ ] Use `workflowRunRepository` for all operations
+- [x] Create `src/lib/mastra/utils/workflow-tracking.ts`
+- [x] Implement `startWorkflowRun(name, input)` function
+- [x] Implement `completeWorkflowRun(id, output)` function
+- [x] Implement `failWorkflowRun(id, error)` function
+- [x] Implement `getWorkflowRun(id)` function
+- [x] Use `workflowRunRepository` for all operations
 - [ ] Add error handling
-- [ ] Export all functions
+- [x] Export all functions
 
 ### 6.2 Integrate Tracking into Workflows
 - [ ] Update Trend Discovery Workflow to track execution
@@ -236,26 +236,26 @@
 ## Task 7: API Routes
 
 ### 7.1 Create Workflow API Routes
-- [ ] Create `src/app/api/workflows/trend-discovery/route.ts`
-- [ ] Create `src/app/api/workflows/generate-content/route.ts`
-- [ ] Create `src/app/api/workflows/publish/route.ts`
-- [ ] Create `src/app/api/workflows/optimize/route.ts`
-- [ ] Implement POST handlers for each workflow
-- [ ] Add request body validation with Zod
+- [x] Create `src/app/api/workflows/trend-discovery/route.ts`
+- [x] Create `src/app/api/workflows/generate-content/route.ts`
+- [x] Create `src/app/api/workflows/publish/route.ts`
+- [x] Create `src/app/api/workflows/optimize/route.ts`
+- [x] Implement POST handlers for each workflow
+- [x] Add request body validation with Zod
 - [ ] Add authentication middleware (placeholder for now)
-- [ ] Return workflow run ID in response
+- [x] Return workflow run ID in response
 
 ### 7.2 Create Status API Routes
-- [ ] Create `src/app/api/workflows/status/[id]/route.ts`
-- [ ] Implement GET handler for workflow status
-- [ ] Return current status, progress, and results
+- [x] Create `src/app/api/workflows/status/[id]/route.ts`
+- [x] Implement GET handler for workflow status
+- [x] Return current status, progress, and results
 - [ ] Add error handling for invalid IDs
 
 ### 7.3 Create Workflow History API
-- [ ] Create `src/app/api/workflows/runs/route.ts`
-- [ ] Implement GET handler with pagination
-- [ ] Add filtering by workflow name, status, date range
-- [ ] Return workflow run history
+- [x] Create `src/app/api/workflows/runs/route.ts`
+- [x] Implement GET handler with pagination
+- [x] Add filtering by workflow name, status, date range
+- [x] Return workflow run history
 - [ ] Add sorting by date (newest first)
 
 ### 7.4 Add API Documentation
@@ -269,20 +269,20 @@
 ## Task 8: Scheduled Workflows
 
 ### 8.1 Set Up Cron Configuration
-- [ ] Create `src/lib/mastra/cron/config.ts`
-- [ ] Define cron schedule for Trend Discovery (every 6 hours)
-- [ ] Define cron schedule for Optimization (daily)
-- [ ] Add enable/disable flags for each schedule
-- [ ] Export cron configuration
+- [x] Create `src/lib/mastra/cron/config.ts`
+- [x] Define cron schedule for Trend Discovery (every 6 hours)
+- [x] Define cron schedule for Optimization (daily)
+- [x] Add enable/disable flags for each schedule
+- [x] Export cron configuration
 
 ### 8.2 Implement Cron Jobs
 - [ ] Install `node-cron` or use Vercel Cron
-- [ ] Create `src/lib/mastra/cron/scheduler.ts`
-- [ ] Implement trend discovery cron job
-- [ ] Implement optimization cron job
-- [ ] Add logging for scheduled executions
+- [x] Create `src/lib/mastra/cron/scheduler.ts`
+- [x] Implement trend discovery cron job
+- [x] Implement optimization cron job
+- [x] Add logging for scheduled executions
 - [ ] Add error notifications for failures
-- [ ] Export scheduler initialization function
+- [x] Export scheduler initialization function
 
 ### 8.3 Integrate with Next.js
 - [ ] Update `src/app/api/cron/route.ts` (or create if doesn't exist)
@@ -295,12 +295,12 @@
 ## Task 9: Error Handling & Retry Logic
 
 ### 9.1 Create Retry Utilities
-- [ ] Create `src/lib/mastra/utils/retry.ts`
-- [ ] Implement `retryWithBackoff` function
-- [ ] Add exponential backoff calculation (2s, 4s, 8s, 16s)
-- [ ] Add configurable max retries
-- [ ] Add logging for retry attempts
-- [ ] Export retry utilities
+- [x] Create `src/lib/mastra/utils/retry.ts`
+- [x] Implement `retryWithBackoff` function
+- [x] Add exponential backoff calculation (2s, 4s, 8s, 16s)
+- [x] Add configurable max retries
+- [x] Add logging for retry attempts
+- [x] Export retry utilities
 
 ### 9.2 Integrate Retry Logic
 - [ ] Add retry to LLM calls in agents (3 retries)
@@ -310,11 +310,11 @@
 - [ ] Test retry behavior with mocked failures
 
 ### 9.3 Create Error Handler Middleware
-- [ ] Create `src/lib/mastra/utils/error-handler.ts`
-- [ ] Implement error classification (transient vs permanent)
-- [ ] Implement error logging with context
+- [x] Create `src/lib/mastra/utils/error-handler.ts`
+- [x] Implement error classification (transient vs permanent)
+- [x] Implement error logging with context
 - [ ] Implement error notification system (placeholder)
-- [ ] Export error handler functions
+- [x] Export error handler functions
 
 ### 9.4 Add Error Handling to All Components
 - [ ] Update all agents with proper error handling
