@@ -223,13 +223,13 @@
 - [x] Export all functions
 
 ### 6.2 Integrate Tracking into Workflows
-- [ ] Update Trend Discovery Workflow to track execution
-- [ ] Update Content Generation Workflow to track execution
-- [ ] Update Publishing Workflow to track execution
-- [ ] Update Optimization Workflow to track execution
-- [ ] Ensure all workflows call `startWorkflowRun` at start
-- [ ] Ensure all workflows call `completeWorkflowRun` on success
-- [ ] Ensure all workflows call `failWorkflowRun` on error
+- [x] Update Trend Discovery Workflow to track execution
+- [x] Update Content Generation Workflow to track execution
+- [x] Update Publishing Workflow to track execution
+- [x] Update Optimization Workflow to track execution
+- [x] Ensure all workflows call `startWorkflowRun` at start
+- [x] Ensure all workflows call `completeWorkflowRun` on success
+- [x] Ensure all workflows call `failWorkflowRun` on error
 
 ---
 
@@ -328,10 +328,10 @@
 ## Task 10: Testing
 
 ### 10.1 Set Up Testing Infrastructure
-- [ ] Update `vitest.config.ts` to include Mastra tests
-- [ ] Create mock LLM responses in `__tests__/mocks/llm.ts`
-- [ ] Create test fixtures for trends, posts, analytics
-- [ ] Create test helpers for workflow execution
+- [x] Update `vitest.config.ts` to include Mastra tests
+- [x] Create mock LLM responses in `__tests__/mocks/llm.ts`
+- [x] Create test fixtures for trends, posts, analytics
+- [x] Create test helpers for workflow execution
 - [ ] Set up test database (use existing setup)
 
 ### 10.2 Write Tool Tests
@@ -389,13 +389,13 @@
 - [ ] Include parameter descriptions and examples
 
 ### 11.2 Create Mastra README
-- [ ] Create `src/lib/mastra/README.md`
-- [ ] Document architecture overview
-- [ ] Document each agent with usage examples
-- [ ] Document each workflow with examples
-- [ ] Document API routes
-- [ ] Add troubleshooting section
-- [ ] Add configuration guide
+- [x] Create `src/lib/mastra/README.md`
+- [x] Document architecture overview
+- [x] Document each agent with usage examples
+- [x] Document each workflow with examples
+- [x] Document API routes
+- [x] Add troubleshooting section
+- [x] Add configuration guide
 
 ### 11.3 Update Main Project README
 - [ ] Add Mastra integration section to main README
@@ -424,10 +424,10 @@
 - [ ] Add performance metrics logging
 
 ### 12.3 Final Validation
-- [ ] Run TypeScript type checking (`pnpm tsc --noEmit`)
+- [x] Run TypeScript type checking (`pnpm tsc --noEmit`)
 - [ ] Run linter (`pnpm lint`)
 - [ ] Run formatter (`pnpm format`)
-- [ ] Run full test suite
+- [x] Run full test suite (113 tests passing)
 - [ ] Verify all OpenSpec requirements are met
 - [ ] Run `openspec validate mastra-integration --strict`
 
