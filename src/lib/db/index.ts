@@ -22,7 +22,16 @@
  */
 
 // Re-export database client and utilities
-export { db, healthCheck, disconnect, getClient, getPoolStats } from './client';
+export {
+  db,
+  healthCheck,
+  disconnect,
+  getClient,
+  getPoolStats,
+  transaction,
+  beginTransaction,
+  type TransactionContext,
+} from './client';
 
 // Re-export error classes
 export {
@@ -33,8 +42,8 @@ export {
   MigrationError,
 } from './errors';
 
-// Re-export schemas (will be populated as schemas are added)
+// Re-export schemas
 export * from './schema';
 
-// Re-export repositories (will be populated as repositories are added)
-// export * from './repositories';
+// Re-export repositories
+export * from './repositories';

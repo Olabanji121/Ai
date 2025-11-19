@@ -1,7 +1,7 @@
 import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
 import * as schema from './schema';
-import { ConnectionError } from './errors';
+import { ConnectionError, TransactionError } from './errors';
 
 // Get DATABASE_URL from environment
 const DATABASE_URL = process.env.DATABASE_URL;
@@ -109,3 +109,131 @@ export const getPoolStats = () => {
     message: 'Pool statistics not available in current postgres.js version',
   };
 };
+
+/**
+ * Execute a callback within a database transaction
+ *
+ * This is the recommended approach for transactions as it automatically
+ * handles commit and rollback based on success or error.
+ *
+ * @param callback - Function to execute within the transaction
+ * @returns The result of the callback
+ * @throws TransactionError if the transaction fails
+ *
+ * @example
+ * ```typescript
+ * const result = await transaction(async (tx) => {
+ *   const trend = await tx.insert(trends).values(data).returning();
+ *   const post = await tx.insert(posts).values(postData).returning();
+ *   return { trend, post };
+ * });
+ * ```
+ */
+export async function transaction<T>(
+  callback: (tx: typeof db) => Promise<T>
+): Promise<T> {
+  try {
+    return await db.transaction(async (tx) => {
+      return await callback(tx as typeof db);
+    });
+  } catch (error) {
+    throw new TransactionError(
+      'Transaction failed and was rolled back',
+      error instanceof Error ? error : new Error(String(error))
+    );
+  }
+}
+
+/**
+ * Transaction context for manual transaction control
+ * Use this for advanced scenarios where you need explicit control
+ */
+export interface TransactionContext {
+  /**
+   * The transaction database instance
+   * Use this instead of `db` for all queries within the transaction
+   */
+  tx: typeof db;
+
+  /**
+   * Commit the transaction
+   * All changes will be persisted to the database
+   */
+  commit: () => Promise<void>;
+
+  /**
+   * Rollback the transaction
+   * All changes will be discarded
+   */
+  rollback: () => Promise<void>;
+}
+
+/**
+ * Begin a manual transaction
+ *
+ * Use this for advanced scenarios where you need explicit control over
+ * transaction lifecycle. You must manually call commit() or rollback().
+ *
+ * @returns Transaction context with tx, commit, and rollback methods
+ * @throws TransactionError if transaction cannot be started
+ *
+ * @example
+ * ```typescript
+ * const { tx, commit, rollback } = await beginTransaction();
+ * try {
+ *   await tx.insert(trends).values(data);
+ *   await tx.insert(posts).values(postData);
+ *   await commit();
+ * } catch (error) {
+ *   await rollback();
+ *   throw error;
+ * }
+ * ```
+ */
+export async function beginTransaction(): Promise<TransactionContext> {
+  try {
+    let transactionDb: typeof db;
+    let commitFn: () => void;
+    let rollbackFn: () => void;
+
+    const transactionPromise = new Promise<typeof db>((resolve, reject) => {
+      db.transaction(async (tx) => {
+        transactionDb = tx as typeof db;
+
+        // Create a promise that will be resolved when commit/rollback is called
+        const controlPromise = new Promise<void>((resolveControl, rejectControl) => {
+          commitFn = resolveControl;
+          rollbackFn = rejectControl;
+        });
+
+        // Notify that transaction is ready
+        resolve(transactionDb);
+
+        // Wait for manual commit or rollback
+        await controlPromise;
+      }).catch(reject);
+    });
+
+    // Wait for transaction to be ready
+    const tx = await transactionPromise;
+
+    return {
+      tx,
+      commit: async () => {
+        if (commitFn) {
+          commitFn();
+        }
+      },
+      rollback: async () => {
+        if (rollbackFn) {
+          rollbackFn(new Error('Transaction rolled back manually'));
+        }
+      },
+    };
+  } catch (error) {
+    throw new TransactionError(
+      'Failed to begin transaction',
+      error instanceof Error ? error : new Error(String(error))
+    );
+  }
+}
