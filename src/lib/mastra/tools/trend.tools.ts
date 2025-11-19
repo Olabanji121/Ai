@@ -31,10 +31,10 @@ export const getTrends = createTool({
     score: z.number(),
     sentiment: z.string().nullable(),
     category: z.string().nullable(),
-    usedForContent: z.boolean(),
+    usedForContent: z.boolean().nullable(),
     status: z.string().nullable(),
   })),
-  execute: async ({ context }) => {
+  execute: async ({ context }: any) => {
     try {
       const trends = await trendRepository.findAll({
         status: context.status,
@@ -44,7 +44,19 @@ export const getTrends = createTool({
         limit: context.limit,
         offset: context.offset,
       });
-      return trends;
+
+      // Transform to match output schema
+      return trends.map((trend) => ({
+        id: trend.id,
+        title: trend.title,
+        hook: trend.hook,
+        source: trend.source,
+        score: trend.score,
+        sentiment: trend.sentiment,
+        category: trend.category,
+        usedForContent: trend.usedForContent,
+        status: trend.status,
+      }));
     } catch (error) {
       throw new Error(`Failed to get trends: ${error instanceof Error ? error.message : String(error)}`);
     }
@@ -68,10 +80,19 @@ export const getTopTrends = createTool({
     score: z.number(),
     category: z.string().nullable(),
   })),
-  execute: async ({ context }) => {
+  execute: async ({ context }: any) => {
     try {
       const trends = await trendRepository.findTopTrends(context.limit);
-      return trends;
+
+      // Transform to match output schema
+      return trends.map((trend) => ({
+        id: trend.id,
+        title: trend.title,
+        hook: trend.hook,
+        source: trend.source,
+        score: trend.score,
+        category: trend.category,
+      }));
     } catch (error) {
       throw new Error(`Failed to get top trends: ${error instanceof Error ? error.message : String(error)}`);
     }
@@ -92,7 +113,7 @@ export const createTrend = createTool({
     score: z.number().min(0).max(100),
     sentiment: z.enum(['positive', 'negative', 'neutral']).optional(),
     category: z.string().optional(),
-    metadata: z.record(z.any()).optional(),
+    metadata: z.record(z.string(), z.any()).optional(),
   }),
   outputSchema: z.object({
     id: z.string(),
@@ -100,7 +121,7 @@ export const createTrend = createTool({
     score: z.number(),
     status: z.string().nullable(),
   }),
-  execute: async ({ context }) => {
+  execute: async ({ context }: any) => {
     try {
       const trend = await trendRepository.create({
         title: context.title,
@@ -112,7 +133,14 @@ export const createTrend = createTool({
         category: context.category,
         metadata: context.metadata,
       });
-      return trend;
+
+      // Transform to match output schema
+      return {
+        id: trend.id,
+        title: trend.title,
+        score: trend.score,
+        status: trend.status,
+      };
     } catch (error) {
       throw new Error(`Failed to create trend: ${error instanceof Error ? error.message : String(error)}`);
     }
@@ -130,10 +158,10 @@ export const markTrendUsed = createTool({
   }),
   outputSchema: z.object({
     id: z.string(),
-    usedForContent: z.boolean(),
+    usedForContent: z.boolean().nullable(),
     status: z.string().nullable(),
   }),
-  execute: async ({ context }) => {
+  execute: async ({ context }: any) => {
     try {
       const trend = await trendRepository.markAsUsed(context.trendId);
       return {

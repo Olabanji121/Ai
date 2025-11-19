@@ -20,9 +20,8 @@ import { mastraConfig } from './config';
  */
 function initializeMastra(): Mastra {
   try {
-    const mastra = new Mastra({
-      name: 'automarketeer',
-    });
+    // Initialize Mastra without config - config is applied per agent/workflow
+    const mastra = new Mastra();
 
     return mastra;
   } catch (error) {

@@ -23,14 +23,28 @@ export const getUserSettings = createTool({
     brandVoice: z.string().nullable(),
     targetAudience: z.string().nullable(),
     platforms: z.array(z.string()).nullable(),
-    autoPublish: z.boolean(),
-    postingSchedule: z.record(z.any()).nullable(),
-    tonePreferences: z.record(z.any()).nullable(),
+    autoPublish: z.boolean().nullable(),
+    postingSchedule: z.record(z.string(), z.any()).nullable(),
+    tonePreferences: z.record(z.string(), z.any()).nullable(),
   }).nullable(),
-  execute: async ({ context }) => {
+  execute: async ({ context }: any) => {
     try {
       const settings = await userSettingsRepository.findByUserId(context.userId);
-      return settings;
+
+      if (!settings) {
+        return null;
+      }
+
+      // Transform to match output schema
+      return {
+        userId: settings.userId,
+        brandVoice: settings.brandVoice,
+        targetAudience: settings.targetAudience,
+        platforms: settings.platforms,
+        autoPublish: settings.autoPublish,
+        postingSchedule: settings.postingSchedule,
+        tonePreferences: settings.tonePreferences,
+      };
     } catch (error) {
       throw new Error(`Failed to get user settings: ${error instanceof Error ? error.message : String(error)}`);
     }
@@ -51,7 +65,7 @@ export const updateBrandVoice = createTool({
     userId: z.string(),
     brandVoice: z.string().nullable(),
   }),
-  execute: async ({ context }) => {
+  execute: async ({ context }: any) => {
     try {
       const settings = await userSettingsRepository.updateBrandVoice(
         context.userId,
@@ -79,7 +93,7 @@ export const getPlatforms = createTool({
   outputSchema: z.object({
     platforms: z.array(z.string()),
   }),
-  execute: async ({ context }) => {
+  execute: async ({ context }: any) => {
     try {
       const settings = await userSettingsRepository.findByUserId(context.userId);
       return {
@@ -104,7 +118,7 @@ export const isPlatformEnabled = createTool({
   outputSchema: z.object({
     enabled: z.boolean(),
   }),
-  execute: async ({ context }) => {
+  execute: async ({ context }: any) => {
     try {
       const enabled = await userSettingsRepository.hasPlatformEnabled(
         context.userId,
