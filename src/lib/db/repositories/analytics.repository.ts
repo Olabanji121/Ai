@@ -7,7 +7,6 @@ import {
   type AnalyticsFilters,
   type AnalyticsWithMetrics,
 } from '../schema/analytics';
-import { posts } from '../schema/posts';
 import { QueryError } from '../errors';
 import { applyPagination } from './base.repository';
 

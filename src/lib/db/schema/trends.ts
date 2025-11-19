@@ -8,7 +8,6 @@ import {
   jsonb,
   index,
 } from 'drizzle-orm/pg-core';
-import { sql } from 'drizzle-orm';
 
 /**
  * Trends Table

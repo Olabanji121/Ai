@@ -18,13 +18,11 @@ if (!DATABASE_URL) {
  * - Max 10 connections
  * - 30s idle timeout
  * - 10s connection timeout
- * - 30s statement timeout
  */
 const connectionConfig: postgres.Options<{}> = {
   max: 10, // Maximum number of connections in the pool
   idle_timeout: 30, // Close idle connections after 30 seconds
   connect_timeout: 10, // Timeout for establishing connection (seconds)
-  statement_timeout: 30000, // 30 seconds in milliseconds
   prepare: false, // Disable prepared statements for transaction pool mode
 };
 
@@ -130,11 +128,11 @@ export const getPoolStats = () => {
  * ```
  */
 export async function transaction<T>(
-  callback: (tx: typeof db) => Promise<T>
+  callback: (tx: any) => Promise<T>
 ): Promise<T> {
   try {
     return await db.transaction(async (tx) => {
-      return await callback(tx as typeof db);
+      return await callback(tx);
     });
   } catch (error) {
     throw new TransactionError(
@@ -153,7 +151,7 @@ export interface TransactionContext {
    * The transaction database instance
    * Use this instead of `db` for all queries within the transaction
    */
-  tx: typeof db;
+  tx: any;
 
   /**
    * Commit the transaction
@@ -192,13 +190,13 @@ export interface TransactionContext {
  */
 export async function beginTransaction(): Promise<TransactionContext> {
   try {
-    let transactionDb: typeof db;
+    let transactionDb: any;
     let commitFn: () => void;
-    let rollbackFn: () => void;
+    let rollbackFn: (error?: Error) => void;
 
-    const transactionPromise = new Promise<typeof db>((resolve, reject) => {
+    const transactionPromise = new Promise<any>((resolve, reject) => {
       db.transaction(async (tx) => {
-        transactionDb = tx as typeof db;
+        transactionDb = tx;
 
         // Create a promise that will be resolved when commit/rollback is called
         const controlPromise = new Promise<void>((resolveControl, rejectControl) => {

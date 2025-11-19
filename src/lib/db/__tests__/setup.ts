@@ -6,7 +6,7 @@
  * setting up test data.
  */
 
-import { vi, beforeAll, afterAll, beforeEach } from 'vitest';
+import { vi, beforeEach } from 'vitest';
 import dotenv from 'dotenv';
 
 // Load test environment variables
@@ -90,7 +90,7 @@ export const testFactories = {
 /**
  * Mock database client for unit tests
  */
-export const mockDbClient = {
+export const mockDbClient: any = {
   select: vi.fn().mockReturnThis(),
   from: vi.fn().mockReturnThis(),
   where: vi.fn().mockReturnThis(),
