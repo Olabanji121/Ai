@@ -6,7 +6,13 @@
 
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { runContentGenerationWorkflow } from '../../workflows/content-generation.workflow';
-import { testFactories, testUuid } from '@/lib/db/__tests__/setup';
+// Valid test UUIDs that pass Zod validation
+const testUuids = {
+  run: '11111111-1111-4111-a111-111111111111',
+  trend: '22222222-2222-4222-a222-222222222222',
+  settings: '33333333-3333-4333-a333-333333333333',
+  user: '44444444-4444-4444-a444-444444444444',
+};
 
 // Mock dependencies
 vi.mock('@/lib/db/repositories', () => ({
@@ -36,7 +42,7 @@ import { contentGenerationAgent } from '../../agents';
 
 describe('Content Generation Workflow', () => {
   const mockWorkflowRun = {
-    id: testUuid(1),
+    id: testUuids.run,
     workflowName: 'content-generation',
     status: 'running',
     input: {},
@@ -50,7 +56,7 @@ describe('Content Generation Workflow', () => {
   };
 
   const mockTrend = {
-    id: testUuid(2),
+    id: testUuids.trend,
     title: 'AI Revolution',
     hook: 'How AI is changing everything',
     source: 'reddit',
@@ -68,8 +74,8 @@ describe('Content Generation Workflow', () => {
   };
 
   const mockUserSettings = {
-    id: testUuid(3),
-    userId: testUuid(4),
+    id: testUuids.settings,
+    userId: testUuids.user,
     brandVoice: 'Professional and engaging',
     targetAudience: 'Tech professionals',
     platforms: ['twitter', 'linkedin'],
@@ -108,13 +114,13 @@ describe('Content Generation Workflow', () => {
   describe('runContentGenerationWorkflow', () => {
     it('should execute workflow with user and auto-selected trend', async () => {
       const input = {
-        userId: testUuid(4),
+        userId: testUuids.user,
         autoSelectTrend: true,
       };
 
       const result = await runContentGenerationWorkflow(input);
 
-      expect(result.runId).toBe(testUuid(1));
+      expect(result.runId).toBe(testUuids.run);
       expect(result.output).toBeDefined();
       expect(result.output.generatedPosts).toBeDefined();
       expect(result.output.posts).toBeDefined();
@@ -124,20 +130,20 @@ describe('Content Generation Workflow', () => {
 
     it('should use specified trend', async () => {
       const input = {
-        userId: testUuid(4),
-        trendId: testUuid(2),
+        userId: testUuids.user,
+        trendId: testUuids.trend,
         autoSelectTrend: false,
       };
 
       await runContentGenerationWorkflow(input);
 
-      expect(trendRepository.findById).toHaveBeenCalledWith(testUuid(2));
+      expect(trendRepository.findById).toHaveBeenCalledWith(testUuids.trend);
       expect(trendRepository.findTopTrends).not.toHaveBeenCalled();
     });
 
     it('should auto-select top trend when trendId not provided', async () => {
       const input = {
-        userId: testUuid(4),
+        userId: testUuids.user,
         autoSelectTrend: true,
       };
 
@@ -148,7 +154,7 @@ describe('Content Generation Workflow', () => {
 
     it('should use specified platforms', async () => {
       const input = {
-        userId: testUuid(4),
+        userId: testUuids.user,
         platforms: ['twitter' as const, 'reddit' as const],
       };
 
@@ -160,7 +166,7 @@ describe('Content Generation Workflow', () => {
 
     it('should include custom instructions in prompt', async () => {
       const input = {
-        userId: testUuid(4),
+        userId: testUuids.user,
         customInstructions: 'Focus on data visualization',
       };
 
@@ -172,7 +178,7 @@ describe('Content Generation Workflow', () => {
 
     it('should mark trend as used after generation', async () => {
       const input = {
-        userId: testUuid(4),
+        userId: testUuids.user,
       };
 
       await runContentGenerationWorkflow(input);
@@ -205,7 +211,7 @@ describe('Content Generation Workflow', () => {
 
       await expect(
         runContentGenerationWorkflow({
-          userId: testUuid(4),
+          userId: testUuids.user,
           autoSelectTrend: true,
         })
       ).rejects.toThrow('No trend available');
@@ -213,7 +219,7 @@ describe('Content Generation Workflow', () => {
 
     it('should track workflow state', async () => {
       await runContentGenerationWorkflow({
-        userId: testUuid(4),
+        userId: testUuids.user,
       });
 
       expect(workflowRunRepository.create).toHaveBeenCalledWith(
@@ -227,7 +233,7 @@ describe('Content Generation Workflow', () => {
 
     it('should generate posts for user platforms by default', async () => {
       const input = {
-        userId: testUuid(4),
+        userId: testUuids.user,
       };
 
       const result = await runContentGenerationWorkflow(input);
@@ -238,7 +244,7 @@ describe('Content Generation Workflow', () => {
 
     it('should return trend information in output', async () => {
       const result = await runContentGenerationWorkflow({
-        userId: testUuid(4),
+        userId: testUuids.user,
       });
 
       expect(result.output.trendUsed.id).toBe(mockTrend.id);

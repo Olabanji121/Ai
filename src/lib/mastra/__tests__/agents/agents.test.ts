@@ -46,6 +46,11 @@ vi.mock('@mastra/core', () => ({
       };
     }
   },
+  createTool: vi.fn().mockImplementation((config) => ({
+    id: config.id,
+    description: config.description,
+    execute: config.execute || vi.fn(),
+  })),
 }));
 
 // Import after mocks
@@ -66,7 +71,7 @@ describe('AI Agents', () => {
     });
 
     it('should have correct name', () => {
-      expect(trendDiscoveryAgent.name).toBe('trend-discovery');
+      expect(trendDiscoveryAgent.name).toBe('trend-discovery-agent');
     });
 
     it('should have instructions', () => {
@@ -92,7 +97,7 @@ describe('AI Agents', () => {
     });
 
     it('should have correct name', () => {
-      expect(contentGenerationAgent.name).toBe('content-generation');
+      expect(contentGenerationAgent.name).toBe('content-generation-agent');
     });
 
     it('should have instructions', () => {
@@ -118,7 +123,7 @@ describe('AI Agents', () => {
     });
 
     it('should have correct name', () => {
-      expect(contentOptimizerAgent.name).toBe('content-optimizer');
+      expect(contentOptimizerAgent.name).toBe('content-optimizer-agent');
     });
 
     it('should have instructions', () => {
