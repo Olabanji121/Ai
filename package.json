@@ -19,6 +19,8 @@
   "license": "ISC",
   "packageManager": "pnpm@10.20.0",
   "dependencies": {
+    "@ai-sdk/anthropic": "^2.0.45",
+    "@ai-sdk/openai": "^2.0.68",
     "@mastra/core": "^0.24.1",
     "drizzle-orm": "^0.44.7",
     "postgres": "^3.4.7",
