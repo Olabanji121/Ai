@@ -66,7 +66,7 @@ export async function completeWorkflowRun(
 ): Promise<{ id: string; status: string; completedAt: Date }> {
   try {
     // Use complete method from repository
-    const run = await workflowRunRepository.complete(id, output);
+    const run = await workflowRunRepository.markCompleted(id, output);
 
     return {
       id: run.id,
@@ -99,7 +99,7 @@ export async function failWorkflowRun(
 
   try {
     // Use fail method from repository
-    const run = await workflowRunRepository.fail(id, errorMessage);
+    const run = await workflowRunRepository.markFailed(id, errorMessage);
 
     return {
       id: run.id,

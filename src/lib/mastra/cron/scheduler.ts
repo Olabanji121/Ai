@@ -40,7 +40,7 @@ async function executeScheduledWorkflow(job: CronJobConfig): Promise<void> {
   console.log(`[Scheduler] Executing scheduled workflow: ${job.name} (${job.workflowName})`);
 
   try {
-    const { runId, output } = await executeWithTracking(
+    const { runId } = await executeWithTracking(
       job.workflowName,
       { ...job.defaultInput, _scheduled: true },
       async () => {
